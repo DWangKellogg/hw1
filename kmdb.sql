@@ -70,34 +70,43 @@
 -- TODO!
 DROP TABLE IF EXISTS Movies;
 DROP TABLE IF EXISTS Top_Cast;
+DROP TABLE IF EXISTS Actors;
 
-
-);
 -- Create new tables, according to your domain model
 -- TODO!
 CREATE TABLE Movies (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  Movie_Title TEXT UNIQUE
+  Movie_Title TEXT UNIQUE,
   Year_Released TEXT,
   MPAA_Rating TEXT,
   Director TEXT
+);
 
 CREATE TABLE Top_Cast (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   Cast TEXT,
   Fictional_Character TEXT
+);
+
+CREATE TABLE Actors (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  Actors TEXT,
+  Fictional_Character TEXT,
+  Movie_Id TEXT
+);
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
-INSERT INTO Movies ( 
-  Movie_Title, Year_Released, MPAA_Rating, Director
-) VALUES (
-    "Batman Begins", "The Dark Knight", "The Dark Knight Rises",
-    "2005", "2008", "2012",
-    "PG-13",
-    "Christopher Nolan",
-);
+INSERT INTO Movies (Movie_Title, Year_Released, MPAA_Rating, Director) VALUES 
+("Batman Begins", "2005", "PG-13", "Christopher Nolan");
+
+INSERT INTO Movies (Movie_Title, Year_Released, MPAA_Rating, Director) VALUES 
+("The Dark Knight", "2008", "PG-13", "Christopher Nolan");
+
+INSERT INTO Movies (Movie_Title, Year_Released, MPAA_Rating, Director) VALUES 
+("The Dark Knight Rises", "2012", "PG-13", "Christopher Nolan");
+
 -- Prints a header for the movies output
 .print "Movies"
 .print "======"
@@ -106,7 +115,7 @@ INSERT INTO Movies (
 -- The SQL statement for the movies output
 -- TODO!
 SELECT *
-FROM Movies
+FROM Movies;
 
 -- Prints a header for the cast output
 .print ""
@@ -117,4 +126,4 @@ FROM Movies
 -- The SQL statement for the cast output
 -- TODO!
 SELECT *
-FROM Top_Cast
+FROM Top_Cast;
