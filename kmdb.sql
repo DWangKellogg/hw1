@@ -150,6 +150,16 @@ VALUES
   ("Joseph", "Gordon-Levitt", 13, 0),
   ("Anne", "Hathaway", 15, 0);
 
+
+SELECT *
+FROM Movies;
+
+SELECT *
+FROM Characters;
+
+SELECT *
+FROM Persons;
+
 -- Prints a header for the movies output
 .print "Movies"
 .print "======"
@@ -172,8 +182,5 @@ SELECT Movies.Movie_Title, Characters.Names
 FROM Movies INNER JOIN Characters ON Movies.id = Characters.Movies_id
 ORDER BY Movies.Movie_Title;
 
-SELECT *
-FROM Characters;
-
-SELECT *
-FROM Persons;
+SELECT Persons.First_name, Persons.last_name, Characters.Names
+FROM Persons INNER JOIN Characters ON Characters.id = Persons.Characters_id;
