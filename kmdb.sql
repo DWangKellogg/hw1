@@ -69,8 +69,8 @@
 -- Drop existing tables, so you'll start fresh each time this script is run.
 -- TODO!
 DROP TABLE IF EXISTS Movies;
-DROP TABLE IF EXISTS Top_Cast;
-DROP TABLE IF EXISTS Actors;
+DROP TABLE IF EXISTS Characters;
+DROP TABLE IF EXISTS Persons;
 
 -- Create new tables, according to your domain model
 -- TODO!
@@ -79,33 +79,78 @@ CREATE TABLE Movies (
   Movie_Title TEXT UNIQUE,
   Year_Released TEXT,
   MPAA_Rating TEXT,
-  Director TEXT
+  Persons_id TEXT
 );
 
-CREATE TABLE Top_Cast (
+CREATE TABLE Characters (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  Cast TEXT,
-  Fictional_Character TEXT
+  Names TEXT, 
+  Movies_Id TEXT
 );
 
-CREATE TABLE Actors (
+CREATE TABLE Persons (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  Actors TEXT,
-  Fictional_Character TEXT,
-  Movie_Id TEXT
+  First_name TEXT,
+  Last_name TEXT,
+  Characters_id TEXT,
+  Movies_Id TEXT
 );
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
-INSERT INTO Movies (Movie_Title, Year_Released, MPAA_Rating, Director) VALUES 
-("Batman Begins", "2005", "PG-13", "Christopher Nolan");
+INSERT INTO Movies 
+  (Movie_Title, Year_Released, MPAA_Rating, Persons_id) 
+VALUES 
+  ("Batman Begins", "2005", "PG-13", 1);
 
-INSERT INTO Movies (Movie_Title, Year_Released, MPAA_Rating, Director) VALUES 
-("The Dark Knight", "2008", "PG-13", "Christopher Nolan");
+INSERT INTO Movies 
+  (Movie_Title, Year_Released, MPAA_Rating, Persons_id) 
+VALUES 
+  ("The Dark Knight", "2008", "PG-13", 1);
 
-INSERT INTO Movies (Movie_Title, Year_Released, MPAA_Rating, Director) VALUES 
-("The Dark Knight Rises", "2012", "PG-13", "Christopher Nolan");
+INSERT INTO Movies 
+  (Movie_Title, Year_Released, MPAA_Rating, Persons_id) 
+VALUES 
+  ("The Dark Knight Rises", "2012", "PG-13", 1);
+
+INSERT INTO Characters 
+  (Names, Movies_Id) 
+VALUES 
+  ("Bruce Wayne", 1),
+  ("Bruce Wayne", 2),
+  ("Bruce Wayne", 3),
+  ("Alfred", 1),
+  ("Alfred", 2),
+  ("Ra's Al Ghul", 1),
+  ("Rachel Dawes", 1),
+  ("Rachel Dawes", 2),
+  ("Commissioner Gordon", 1),
+  ("Commissioner Gordon", 3),
+  ("Joker", 2),
+  ("Harvey Dent", 2),
+  ("Bane", 3),
+  ("John Blake", 3),
+  ("Selina Kyle", 3);
+
+
+INSERT INTO Persons 
+  (First_name, Last_name, Characters_id, Movies_Id) 
+VALUES 
+  ("Christopher", "Nolan", 0, 1),
+  ("Christian", "Bale", 1, 0),
+  ("Michael", "Caine", 4, 0),
+  ("Liam", "Neeson", 5, 0),
+  ("Katie", "Holmes", 7, 0),
+  ("Maggie", "Gyllenhaal", 8, 0),
+  ("Gary", "Oldman", 9, 0),
+  ("Heath", "Ledger", 11, 0),
+  ("Aaron", "Eckhart", 12, 0),
+  ("Tom", "Hardy", 13, 0),
+  ("Joseph", "Gordon-Levitt", 13, 0),
+  ("Anne", "Hathaway", 15, 0);
+
+
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -126,4 +171,7 @@ FROM Movies;
 -- The SQL statement for the cast output
 -- TODO!
 SELECT *
-FROM Top_Cast;
+FROM Characters;
+
+SELECT *
+FROM Persons;
