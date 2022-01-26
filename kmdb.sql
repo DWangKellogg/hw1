@@ -150,8 +150,6 @@ VALUES
   ("Joseph", "Gordon-Levitt", 13, 0),
   ("Anne", "Hathaway", 15, 0);
 
-
-
 -- Prints a header for the movies output
 .print "Movies"
 .print "======"
@@ -159,8 +157,8 @@ VALUES
 
 -- The SQL statement for the movies output
 -- TODO!
-SELECT *
-FROM Movies;
+SELECT Movies.Movie_Title, Movies.Year_Released, Movies.MPAA_Rating, Persons.First_name, Persons.Last_name
+FROM Movies INNER JOIN Persons ON Persons.id = Movies.Persons_id;
 
 -- Prints a header for the cast output
 .print ""
@@ -170,6 +168,10 @@ FROM Movies;
 
 -- The SQL statement for the cast output
 -- TODO!
+SELECT Movies.Movie_Title, Characters.Names
+FROM Movies INNER JOIN Characters ON Movies.id = Characters.Movies_id
+ORDER BY Movies.Movie_Title;
+
 SELECT *
 FROM Characters;
 
