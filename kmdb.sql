@@ -183,4 +183,10 @@ FROM Movies INNER JOIN Characters ON Movies.id = Characters.Movies_id
 ORDER BY Movies.Movie_Title;
 
 SELECT Persons.First_name, Persons.last_name, Characters.Names
-FROM Persons INNER JOIN Characters ON Characters.id = Persons.Characters_id;
+FROM Persons INNER JOIN Characters ON Characters.id = Persons.Characters_id
+ORDER BY Movies.Movie_Title;
+
+SELECT Movies.Movie_Title, Persons.First_name, Persons.last_name, Characters.Names
+FROM Movies INNER JOIN Characters ON Movies.id = Characters.Movies_id
+INNER JOIN Persons ON Characters.id = Persons.Characters_id
+ORDER BY Movies.Movie_Title;
