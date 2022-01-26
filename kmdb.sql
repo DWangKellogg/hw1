@@ -85,14 +85,14 @@ CREATE TABLE Movies (
 CREATE TABLE Characters (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   Names TEXT, 
+  Movies_Id TEXT,
   Persons_Id TEXT
 );
 
 CREATE TABLE Persons (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   First_name TEXT,
-  Last_name TEXT,
-  Movies_Id TEXT
+  Last_name TEXT
 );
 
 -- Insert data into your database that reflects the sample data shown above
@@ -114,40 +114,41 @@ VALUES
   ("The Dark Knight Rises", "2012", "PG-13", 1);
 
 INSERT INTO Characters 
-  (Names, Persons_Id) 
+  (Names, Movies_Id, Persons_id) 
 VALUES 
-  ("Bruce Wayne", 1),
-  ("Alfred", 5),
-  ("Ra's Al Ghul", 6),
-  ("Rachel Dawes", 7),
-  ("Rachel Dawes", 8),
-  ("Commissioner Gordon", 9),
-  ("Joker", 12),
-  ("Harvey Dent", 13),
-  ("Bane", 14),
-  ("John Blake", 15),
-  ("Selina Kyle", 16);
+  ("Bruce Wayne", 1, 2),
+  ("Bruce Wayne", 2, 2),
+  ("Bruce Wayne", 3, 2),
+  ("Joker", 2, 8),  
+  ("Harvey Dent", 2, 9),
+  ("Alfred", 1, 3),
+  ("Alfred", 2, 3),
+  ("Ra's Al Ghul", 1, 4),
+  ("Rachel Dawes", 1, 5),
+  ("Rachel Dawes", 2, 6),
+  ("Commissioner Gordon", 1, 7),
+  ("Commissioner Gordon", 3, 7),
+  ("Bane", 3, 10),
+  ("John Blake", 3, 11),
+  ("Selina Kyle", 3, 12);
 
 
 INSERT INTO Persons 
-  (First_name, Last_name, Movies_Id) 
+  (First_name, Last_name)
 VALUES 
-  ("Christopher", "Nolan", 1),
-  ("Christian", "Bale", 1),
-  ("Christian", "Bale", 2),
-  ("Christian", "Bale", 3),
-  ("Michael", "Caine", 1),
-  ("Michael", "Caine", 2),
-  ("Liam", "Neeson", 1),
-  ("Katie", "Holmes", 1),
-  ("Maggie", "Gyllenhaal", 2),
-  ("Gary", "Oldman", 0),
-  ("Gary", "Oldman", 3),
-  ("Heath", "Ledger", 2),
-  ("Aaron", "Eckhart", 2),
-  ("Tom", "Hardy", 3),
-  ("Joseph", "Gordon-Levitt", 3),
-  ("Anne", "Hathaway", 3);
+  ("Christopher", "Nolan"),
+  ("Christian", "Bale"),
+  ("Michael", "Caine"),
+  ("Liam", "Neeson"),
+  ("Katie", "Holmes"),
+  ("Maggie", "Gyllenhaal"),
+  ("Gary", "Oldman"),
+  ("Heath", "Ledger"),
+  ("Aaron", "Eckhart"),
+  ("Tom", "Hardy"),
+  ("Joseph", "Gordon-Levitt"),
+  ("Anne", "Hathaway");
+
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -168,28 +169,7 @@ FROM Movies INNER JOIN Persons ON Persons.id = Movies.Persons_id;
 -- The SQL statement for the cast output
 -- TODO!
 
-SELECT Movies.Movie_Title, Persons.First_name, Persons.last_name
-FROM Movies 
-INNER JOIN Persons ON Movies.id = Persons.Movies_id
-ORDER BY Movies.Movie_Title;
-
-SELECT Movies.Movie_Title, Characters.Names
-FROM Movies
-INNER JOIN Characters ON Movies.id = Characters.Movies_id
-ORDER BY Movies.Movie_Title;
-
-
 SELECT Movies.Movie_Title, Persons.First_name, Persons.last_name, Characters.Names
-FROM Movies INNER JOIN Characters ON Movies.id = Characters.Movies_id
-INNER JOIN Persons ON Persons.Characters_id = Characters.id
-ORDER BY Movies.Movie_Title;
-
-.print ""
-.print "Top Cast Test"
-.print "========"
-.print ""
-
-SELECT Movies.Movie_Title, Persons.First_name, Persons.last_name, Characters.Names
-FROM Movies INNER JOIN Persons ON Movies.id = Persons.Movies_id
-INNER JOIN Characters ON Persons.id = Characters.Persons_id
+FROM Characters INNER JOIN Movies ON Characters.Movies_id = Movies.id
+INNER JOIN Persons ON Characters.Persons_id = Persons.id 
 ORDER BY Movies.Movie_Title;
