@@ -138,27 +138,23 @@ INSERT INTO Persons
   (First_name, Last_name, Characters_id, Movies_Id) 
 VALUES 
   ("Christopher", "Nolan", 0, 1),
-  ("Christian", "Bale", 1, 0),
-  ("Michael", "Caine", 4, 0),
-  ("Liam", "Neeson", 5, 0),
-  ("Katie", "Holmes", 7, 0),
-  ("Maggie", "Gyllenhaal", 8, 0),
+  ("Christian", "Bale", 1, 1),
+  ("Christian", "Bale", 1, 2),
+  ("Christian", "Bale", 1, 3),
+  ("Michael", "Caine", 4, 1),
+  ("Michael", "Caine", 4, 2),
+  ("Liam", "Neeson", 5, 1),
+  ("Katie", "Holmes", 7, 1),
+  ("Maggie", "Gyllenhaal", 8, 2),
   ("Gary", "Oldman", 9, 0),
-  ("Heath", "Ledger", 11, 0),
-  ("Aaron", "Eckhart", 12, 0),
-  ("Tom", "Hardy", 13, 0),
-  ("Joseph", "Gordon-Levitt", 13, 0),
-  ("Anne", "Hathaway", 15, 0);
+  ("Gary", "Oldman", 9, 3),
+  ("Heath", "Ledger", 11, 2),
+  ("Aaron", "Eckhart", 12, 2),
+  ("Tom", "Hardy", 13, 3),
+  ("Joseph", "Gordon-Levitt", 13, 3),
+  ("Anne", "Hathaway", 15, 3);
 
 
-SELECT *
-FROM Movies;
-
-SELECT *
-FROM Characters;
-
-SELECT *
-FROM Persons;
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -178,15 +174,23 @@ FROM Movies INNER JOIN Persons ON Persons.id = Movies.Persons_id;
 
 -- The SQL statement for the cast output
 -- TODO!
+
+SELECT *
+FROM Movies;
+SELECT *
+FROM Characters;
+SELECT *
+FROM Persons;
+
+SELECT Movies.Movie_Title, Persons.First_name, Persons.last_name
+FROM Movies INNER JOIN Persons ON Movies.id = Persons.Movies_id 
+ORDER BY Movies.Movie_Title;
+
 SELECT Movies.Movie_Title, Characters.Names
 FROM Movies INNER JOIN Characters ON Movies.id = Characters.Movies_id
 ORDER BY Movies.Movie_Title;
 
-SELECT Persons.First_name, Persons.last_name, Characters.Names
-FROM Persons INNER JOIN Characters ON Characters.id = Persons.Characters_id
-ORDER BY Movies.Movie_Title;
-
 SELECT Movies.Movie_Title, Persons.First_name, Persons.last_name, Characters.Names
 FROM Movies INNER JOIN Characters ON Movies.id = Characters.Movies_id
-INNER JOIN Persons ON Characters.id = Persons.Characters_id
+INNER JOIN Persons ON Persons.Characters_id = Characters.id
 ORDER BY Movies.Movie_Title;
